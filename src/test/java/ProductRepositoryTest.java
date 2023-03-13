@@ -77,4 +77,34 @@ public class ProductRepositoryTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    public void searchByWhenOneItemFound() {
+        ProductRepository prod = new ProductRepository();
+        ProductManager manager = new ProductManager(prod);
+
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+
+        Product[] expected = {item1};
+        Product[] actual = manager.searchBy("book1");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    public void searchByWhenItemNotFound() {
+        ProductRepository prod = new ProductRepository();
+        ProductManager manager = new ProductManager(prod);
+
+        manager.add(item1);
+        manager.add(item2);
+        manager.add(item3);
+
+        Product[] expected = new Product[0];
+        Product[] actual = manager.searchBy("book18");
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
 }
